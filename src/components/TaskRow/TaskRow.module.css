@@ -1,0 +1,294 @@
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 0;
+  border-top: 0.5px solid var(--border);
+  position: relative;
+}
+
+.row:first-child {
+  border-top: none;
+}
+
+.cb {
+  width: 15px;
+  height: 15px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s;
+}
+
+.cb.checked {
+  background: var(--text);
+  border-color: var(--text);
+}
+
+.cb.checked::after {
+  content: '';
+  width: 3px;
+  height: 6px;
+  border: 1.5px solid var(--bg);
+  border-top: none;
+  border-left: none;
+  transform: rotate(42deg) translateY(-1px);
+  display: block;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+  cursor: pointer;
+  word-break: break-word;
+  flex: 1;
+  min-width: 120px;
+}
+
+.text.done {
+  color: var(--text3);
+  text-decoration: line-through;
+}
+
+.meta {
+  display: contents;
+}
+
+.tagPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-family: var(--mono);
+  padding: 2px 7px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.12s;
+  line-height: 1.4;
+}
+
+.tagDel {
+  opacity: 0;
+  font-size: 10px;
+  transition: opacity 0.1s;
+}
+
+.tagPill:hover .tagDel {
+  opacity: 0.7;
+}
+
+.deadlineBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-family: var(--mono);
+  padding: 2px 7px;
+  border-radius: 20px;
+  background: var(--surface2);
+  color: var(--text2);
+}
+
+.deadlineBadge.overdue {
+  background: var(--red-bg);
+  color: var(--red);
+}
+
+.deadlineBadge.soon {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+.metaBtn {
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text3);
+  font-size: 13px;
+  transition: opacity 0.12s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+
+.row:hover .metaBtn {
+  opacity: 1;
+}
+
+.metaBtn:hover {
+  color: var(--text);
+  background: var(--surface2);
+}
+
+.delBtn {
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text3);
+  font-size: 13px;
+  transition: opacity 0.12s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+
+.row:hover .delBtn {
+  opacity: 1;
+}
+
+.delBtn:hover {
+  color: var(--red);
+  background: var(--red-bg);
+}
+
+/* Tag dropdown */
+.tagDd {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: var(--surface);
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 200;
+  padding: 6px;
+  min-width: 180px;
+}
+
+.ddTitle {
+  font-size: 10px;
+  font-family: var(--mono);
+  color: var(--text3);
+  padding: 2px 6px 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tagOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: var(--mono);
+  transition: background 0.1s;
+}
+
+.tagOption:hover {
+  background: var(--surface2);
+}
+
+.tagDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tagCheck {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text3);
+}
+
+.ddSep {
+  height: 0.5px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+.newTagRow {
+  display: flex;
+  gap: 6px;
+  padding: 4px 6px;
+}
+
+.tagInput {
+  flex: 1;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-family: var(--mono);
+  background: var(--surface2);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  outline: none;
+}
+
+.tagInput:focus {
+  border-color: var(--border-strong);
+}
+
+.colorPicker {
+  display: flex;
+  gap: 4px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 60px;
+}
+
+.colorDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.colorDotSelected {
+  outline: 2px solid var(--text);
+  outline-offset: 1px;
+}
+
+.createTagBtn {
+  margin: 4px 6px 2px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: opacity 0.12s;
+}
+
+.createTagBtn:hover {
+  opacity: 0.8;
+}
