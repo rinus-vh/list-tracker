@@ -100,6 +100,50 @@
   padding: 20px 24px;
 }
 
+/* Mobile sidebar overlay */
+.overlay {
+  display: none;
+}
+
+/* Hamburger — hidden on desktop */
+.hamburger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 299;
+  }
+
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 400;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.15s;
+  }
+
+  .hamburger:hover {
+    opacity: 0.85;
+  }
+}
+
 /* Scrollbar */
 .content::-webkit-scrollbar { width: 4px; }
 .content::-webkit-scrollbar-track { background: transparent; }

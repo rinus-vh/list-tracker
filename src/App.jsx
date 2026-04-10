@@ -25,9 +25,15 @@ export function App() {
   const [modal, setModal] = useState(null)
   const [editingTitle, setEditingTitle] = useState(false)
   const [titleValue, setTitleValue] = useState('')
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const titleInputRef = useRef(null)
 
   const currentList = currentListId ? listsData[currentListId] : null
+
+  // Always read fresh list data to avoid stale-closure overwrites
+  function freshList(id = currentListId) {
+    return listsData[id]
+  }
 
   useEffect(() => {
     if (user?.uid) ensureDefaultData(user.uid)
@@ -105,6 +111,7 @@ export function App() {
     setActiveTab('tasks')
     setCoachHistory([])
     setEditingTitle(false)
+    setSidebarOpen(false)
   }
 
   function listRef(id) {
@@ -112,7 +119,8 @@ export function App() {
   }
 
   async function saveCurrentList(updates) {
-    await setDoc(listRef(currentListId), { ...currentList, ...updates })
+    const list = freshList()
+    await setDoc(listRef(currentListId), { ...list, ...updates })
   }
 
   // --- List actions ---
@@ -196,21 +204,25 @@ export function App() {
 
   // --- Tag actions ---
   async function handleAddTag(themeId, taskId, tagId) {
-    const themes = currentList.themes.map(t => {
+    const list = freshList()
+    const themes = list.themes.map(t => {
       if (t.id !== themeId) return t
       return {
         ...t,
         tasks: t.tasks.map(task => {
           if (task.id !== taskId) return task
-          return { ...task, tags: [...(task.tags || []), tagId] }
+          const tags = task.tags || []
+          if (tags.includes(tagId)) return task
+          return { ...task, tags: [...tags, tagId] }
         }),
       }
     })
-    await saveCurrentList({ themes })
+    await setDoc(listRef(currentListId), { ...list, themes })
   }
 
   async function handleRemoveTag(themeId, taskId, tagId) {
-    const themes = currentList.themes.map(t => {
+    const list = freshList()
+    const themes = list.themes.map(t => {
       if (t.id !== themeId) return t
       return {
         ...t,
@@ -220,12 +232,13 @@ export function App() {
         }),
       }
     })
-    await saveCurrentList({ themes })
+    await setDoc(listRef(currentListId), { ...list, themes })
   }
 
   async function handleCreateTag(themeId, taskId, name, color) {
+    const list = freshList()
     const newTag = { id: uid(), name, color }
-    const themes = currentList.themes.map(t => {
+    const themes = list.themes.map(t => {
       if (t.id !== themeId) return t
       return {
         ...t,
@@ -235,7 +248,7 @@ export function App() {
         }),
       }
     })
-    await saveCurrentList({ tags: [...(currentList.tags || []), newTag], themes })
+    await setDoc(listRef(currentListId), { ...list, tags: [...(list.tags || []), newTag], themes })
   }
 
   // --- Deadline ---
@@ -278,6 +291,18 @@ export function App() {
 
   return (
     <div className={styles.app}>
+      {sidebarOpen && (
+        <div className={styles.overlay} onClick={() => setSidebarOpen(false)} />
+      )}
+
+      <button
+        className={styles.hamburger}
+        onClick={() => setSidebarOpen(v => !v)}
+        aria-label="Menu openen"
+      >
+        ☰
+      </button>
+
       <Aside
         lists={listsData}
         currentListId={currentListId}
@@ -291,6 +316,7 @@ export function App() {
         })}
         onTogglePin={handleTogglePin}
         user={user}
+        open={sidebarOpen}
       />
 
       <main className={styles.main}>

@@ -1,9 +1,10 @@
+import cx from 'clsx'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase.js'
 import { ListItem } from '../ListItem/ListItem.jsx'
 import styles from './Aside.module.css'
 
-export function Aside({ lists, currentListId, onSelectList, onNewList, onEditList, onDeleteList, onTogglePin, user }) {
+export function Aside({ lists, currentListId, onSelectList, onNewList, onEditList, onDeleteList, onTogglePin, user, open }) {
   const sorted = Object.values(lists).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
   const pinned = sorted.filter(l => l.pinned)
   const unpinned = sorted.filter(l => !l.pinned)
@@ -13,7 +14,7 @@ export function Aside({ lists, currentListId, onSelectList, onNewList, onEditLis
   }
 
   return (
-    <aside className={styles.aside}>
+    <aside className={cx(styles.aside, open && styles.open)}>
       <div className={styles.header}>
         <span className={styles.logo}>list tracker</span>
         <div className={styles.avatar} onClick={handleSignOut} title="Uitloggen">

@@ -8,6 +8,23 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 300;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .aside.open {
+    transform: translateX(0);
+  }
+}
+
 .header {
   padding: 14px 14px 10px;
   display: flex;
