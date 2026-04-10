@@ -1,0 +1,61 @@
+.screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 0.5px solid var(--border-md);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.logo {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--text);
+  margin-bottom: 6px;
+  font-style: italic;
+}
+
+.sub {
+  font-size: 13px;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin-bottom: 2rem;
+}
+
+.googleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 20px;
+  background: var(--surface);
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--text);
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.googleBtn:hover {
+  background: var(--surface2);
+}
+
+.googleBtn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}

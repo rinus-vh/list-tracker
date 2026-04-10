@@ -1,0 +1,88 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text2);
+  transition: all 0.12s;
+  position: relative;
+  user-select: none;
+  margin: 1px 6px;
+}
+
+.item:hover {
+  background: var(--surface3);
+  color: var(--text);
+}
+
+.item.active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pin {
+  font-size: 10px;
+  opacity: 0;
+  transition: opacity 0.12s;
+  margin-left: auto;
+}
+
+.item:hover .pin {
+  opacity: 1;
+}
+
+.item.pinned .pin {
+  opacity: 0.5;
+}
+
+.actions {
+  display: none;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.item:hover .actions {
+  display: flex;
+}
+
+.item:hover .pin {
+  display: none;
+}
+
+.actBtn {
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text3);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  padding: 0;
+}
+
+.actBtn:hover {
+  background: var(--border-md);
+  color: var(--text);
+}
