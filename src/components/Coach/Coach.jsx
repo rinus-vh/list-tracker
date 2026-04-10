@@ -43,7 +43,7 @@ export function Coach({ list, user, history, onHistoryUpdate }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           uid: user.uid,
-          model: 'claude-sonnet-4-20250514',
+          model: 'claude-haiku-4-5-20251001',
           max_tokens: 1000,
           system: systemPrompt,
           messages: newHistory,
